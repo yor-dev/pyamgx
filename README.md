@@ -4,3 +4,6 @@
 
 For installation instructions, overview and examples, see the
 [documentation](https://pyamgx.readthedocs.io).
+
+## difference
+Vector().download(data) accepts not only a numpy array but also a cupy array
