@@ -99,7 +99,8 @@ cdef class Vector:
 
         return self
 
-    def download(self, double[:] data=None):
+    #org def download(self, double[:] data=None):
+    def download(self, data):
         """
         v.download(data)
 
@@ -114,8 +115,13 @@ cdef class Vector:
             n = self.get_size()[0]
             data = np.zeros(n, dtype=np.float64)
 
-        self.download_raw(<uintptr_t> &data[0])
-        return np.asarray(data)
+
+        # added
+        cdef uintptr_t ptr = ptr_from_array_interface(data, "float64")
+
+        self.download_raw(<uintptr_t> ptr)
+        #org return np.asarray(data)
+        return data
 
     def download_raw(self, uintptr_t ptr):
         """
